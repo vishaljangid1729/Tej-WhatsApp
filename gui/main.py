@@ -301,10 +301,9 @@ global file_name
 
 
 def shoot():
-    logs_frame = Frame(root)
-
     for w in logs_frame.winfo_children():
         w.destroy()
+    logs_frame.update_idletasks()
 
     logs_frame.pack(padx=100)
 
@@ -357,6 +356,7 @@ def shoot():
                     msg.send_message(message)
                     msg.catch_alert()
                 success_listbox.insert(END, f"Messges sent to: {candidate_name}")
+                success_listbox.update_idletasks()
 
         error_listbox.config(yscrollcommand=error_box.set)
         success_listbox.config(yscrollcommand=success_box.set)
@@ -365,6 +365,7 @@ def shoot():
         error_box.config(command=error_listbox.yview)
     except:
         error_listbox.insert(END, f"Unable to send {candidate_name}")
+        error_listbox.update_idletasks()
 
 
 def FileSelect():
@@ -484,6 +485,8 @@ def show_details():
 files_menu = Frame(root)
 # bottom_frame = Frame(root)
 detail_frame = Frame(root)
+logs_frame = Frame(root)
+
 
 l2 = Label(root, text="Select the CSV filesafdsa: ")
 l2.pack(side="bottom")
