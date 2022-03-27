@@ -95,8 +95,6 @@ class WhatsApp(object):
             self.mobile = mobile
             link = self.get_phone_link(mobile)
             self.browser.get(link)
-            # return
-            self.catch_alert()
             return
             action_button = self.wait.until(
                 EC.presence_of_element_located((By.XPATH, '//*[@id="action-button"]'))
@@ -110,7 +108,6 @@ class WhatsApp(object):
             )
             go_to_web.click()
             time.sleep(1)
-            return
         except UnexpectedAlertPresentException as bug:
             print(bug)
             time.sleep(1)
@@ -296,6 +293,7 @@ root.geometry("%dx%d" % (width, height))
 root.title("Tej WhatsApp")
 
 
+
 global file_name
 
 
@@ -303,6 +301,8 @@ def shoot():
     for w in logs_frame.winfo_children():
         w.destroy()
     logs_frame.update_idletasks()
+
+    done_count_str.set('0')
 
     logs_frame.pack(padx=50, ipadx=10, fill='x')
 
@@ -344,6 +344,7 @@ def shoot():
         success_listbox.insert(END, "Opening WhatsApp")
         success_listbox.update_idletasks()
 
+        count = 0
         data = []
         for i in range(4, len(rows)):
             candidate_name = rows[i][0]
@@ -360,6 +361,8 @@ def shoot():
                     msg.send_message(message)
                     msg.catch_alert()
                 success_listbox.insert(END, f"Messges sent to: {candidate_name}")
+                count += 1
+                done_count_str.set(str(count))
                 success_listbox.update_idletasks()
 
         error_listbox.config(yscrollcommand=error_box.set)
@@ -428,6 +431,8 @@ def show_details():
 
         num_script_var = int(rows[2][1])
 
+        count = 0
+
         for i in range(4, len(rows)):
             candidate_name = rows[i][0]
             number = "91" + rows[i][1]
@@ -466,7 +471,7 @@ def show_details():
         name.grid(row=7, column=4)
 
         done_count = Label(
-            right_detail_frame, text="0", foreground="blue", font="Helvetica4 40 bold"
+            right_detail_frame, textvariable=done_count_str, foreground="blue", font="Helvetica4 40 bold"
         )
         total_count = Label(
             right_detail_frame,
@@ -490,6 +495,9 @@ files_menu = Frame(root)
 # bottom_frame = Frame(root)
 detail_frame = Frame(root)
 logs_frame = Frame(root)
+
+done_count_str = StringVar()
+done_count_str.set("0")
 
 
 l2 = Label(root, text="Select the CSV filesafdsa: ")
