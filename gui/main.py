@@ -5,6 +5,7 @@ import os
 import sys
 import time
 from tkinter import messagebox
+from unittest import expectedFailure
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -478,40 +479,30 @@ def show_details():
 
 
 files_menu = Frame(root)
+bottom_frame = Frame(root)
 detail_frame = Frame(root)
+
+l2 = Label(files_menu, text="Select the CSV file: ")
+l2.pack(side='bottom')
+bottom_frame.pack(side='bottom')
 
 
 
 l1 = Label(files_menu, text="Select the CSV file: ")
-l1.grid(row=1, column=1, padx=10, pady=10)
+l1.pack(fill='both', side='left',)
 
 
 sel = FileSelect()
 
 
 fileSelectButton = Button(files_menu, text="Select File", command=sel)
-fileSelectButton.grid(row=1, column=2, padx=10, pady=10)
+fileSelectButton.pack(fill='both', side='left')
 
 
 shoot_sleep = Button(files_menu, text="Shoot & Sleep",
                      command=shoot, state='disabled')
-shoot_sleep.grid(row=1, column=3, sticky='w', padx=10, pady=10)
+shoot_sleep.pack(fill='both', side='right')
 
-files_menu.pack()
-
-bottom_frame = Frame(root)
-
-bottom_text = Label(root, text='Send me meme or invite me for dinner')
-bottom_frame.pack()
-bottom_frame.pack()
-
-logo = PhotoImage(file="whatsapp_qr.png")
-Label (root, image=logo, bg="#f0f0f0") .grid(row=0, column=0)
-
-T = Text(root, height=2, width=30)
-T.insert(END, "Just a text Widget\nin two lines\n")
-T.grid(row=1, column=0, sticky=S)
-
-root.grid_rowconfigure(1,weight=1)
+files_menu.pack(fill='both', padx=100, pady=10)
 
 root.mainloop()
