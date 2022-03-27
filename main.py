@@ -1,5 +1,5 @@
-from scripts import resume_parse
+from tkinter import *
 
+main = Tk()
 
-if __name__ == "__main__":
-    resume_parse.Hello()
+main.mainloop()
