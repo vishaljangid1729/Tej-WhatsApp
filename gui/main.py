@@ -304,23 +304,25 @@ def shoot():
         w.destroy()
     logs_frame.update_idletasks()
 
-    logs_frame.pack(padx=100)
+    logs_frame.pack(padx=50, ipadx=10, fill='x')
 
     success_box = Scrollbar(logs_frame)
     error_box = Scrollbar(logs_frame)
 
-    success_box.pack(side="left", fill=BOTH)
-    error_box.pack(side="right", fill=BOTH)
 
     success_listbox = Listbox(logs_frame)
     error_listbox = Listbox(logs_frame)
 
-    success_listbox.pack(side="left", fill=BOTH)
-    error_listbox.pack(side="left", fill=BOTH)
+    success_listbox.pack(side="left", fill='x', expand=True)
+    success_box.pack(side="left", fill='both')
+    error_listbox.pack(side="left", fill='x', expand=True)
+    error_box.pack(side="right", fill='both')
 
     success_box.update_idletasks()
     error_box.update_idletasks()
     logs_frame.update_idletasks()
+    success_listbox.update_idletasks()
+    error_listbox.update_idletasks()
 
     try:
         msg = WhatsApp()
@@ -338,6 +340,9 @@ def shoot():
         script_msg
 
         num_script_var = int(rows[2][1])
+
+        success_listbox.insert(END, "Opening WhatsApp")
+        success_listbox.update_idletasks()
 
         data = []
         for i in range(4, len(rows)):

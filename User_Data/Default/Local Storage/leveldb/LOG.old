@@ -1,3 +1,8 @@
-2022/03/27-12:04:38.742 1e03 Reusing MANIFEST /Users/b0224754/Documents/Tej-Contact/User_Data/Default/Local Storage/leveldb/MANIFEST-000001
-2022/03/27-12:04:38.743 1e03 Recovering log #4
-2022/03/27-12:04:38.743 1e03 Reusing old log /Users/b0224754/Documents/Tej-Contact/User_Data/Default/Local Storage/leveldb/000004.log 
+2022/03/27-12:33:05.200 2b03 Reusing MANIFEST /Users/b0224754/Documents/Tej-Contact/User_Data/Default/Local Storage/leveldb/MANIFEST-000001
+2022/03/27-12:33:05.205 2b03 Recovering log #4
+2022/03/27-12:33:05.205 2b03 Level-0 table #6: started
+2022/03/27-12:33:05.226 2b03 Level-0 table #6: 18124 bytes OK
+2022/03/27-12:33:05.227 2b03 Recovering log #6
+2022/03/27-12:33:05.227 2b03 Reusing old log /Users/b0224754/Documents/Tej-Contact/User_Data/Default/Local Storage/leveldb/000006.log 
+2022/03/27-12:33:05.287 2b03 Delete type=0 #4
+2022/03/27-12:33:05.287 2b03 Delete type=2 #7
