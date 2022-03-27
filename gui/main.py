@@ -15,7 +15,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import (
     UnexpectedAlertPresentException,
     NoSuchElementException,
-
 )
 from webdriver_manager.chrome import ChromeDriverManager
 
@@ -45,8 +44,7 @@ class WhatsApp(object):
         chrome_options = Options()
         if sys.platform == "win32":
             chrome_options.add_argument("--profile-directory=Default")
-            chrome_options.add_argument(
-                "--user-data-dir=C:/Temp/ChromeProfile")
+            chrome_options.add_argument("--user-data-dir=C:/Temp/ChromeProfile")
         else:
             chrome_options.add_argument("start-maximized")
             chrome_options.add_argument("--user-data-dir=./User_Data")
@@ -102,8 +100,7 @@ class WhatsApp(object):
             self.catch_alert()
             return
             action_button = self.wait.until(
-                EC.presence_of_element_located(
-                    (By.XPATH, '//*[@id="action-button"]'))
+                EC.presence_of_element_located((By.XPATH, '//*[@id="action-button"]'))
             )
             action_button.click()
             time.sleep(2)
@@ -280,13 +277,12 @@ class WhatsApp(object):
 
 def create_msg(name, hr_name, script_msg, num_script_var, var_values):
 
-    script_msg = [msg.replace('CANDIDATE NAME', name) for msg in script_msg]
-    script_msg = [msg.replace('HR NAME', hr_name) for msg in script_msg]
-    a = ''
+    script_msg = [msg.replace("CANDIDATE NAME", name) for msg in script_msg]
+    script_msg = [msg.replace("HR NAME", hr_name) for msg in script_msg]
+    a = ""
     for i in range(num_script_var):
         a = i + 1
-        script_msg = [msg.replace(str(a) + '*', var_values[i])
-                      for msg in script_msg]
+        script_msg = [msg.replace(str(a) + "*", var_values[i]) for msg in script_msg]
     return script_msg
 
     # print(name, script_msg, num_script_var, var_values)
@@ -315,21 +311,23 @@ def shoot():
     success_box = Scrollbar(logs_frame)
     error_box = Scrollbar(logs_frame)
 
-    success_box.pack(side='left', fill=BOTH)
-    error_box.pack(side='right', fill=BOTH)
+    success_box.pack(side="left", fill=BOTH)
+    error_box.pack(side="right", fill=BOTH)
 
     success_listbox = Listbox(logs_frame)
     error_listbox = Listbox(logs_frame)
 
-    success_listbox.pack(side='left', fill=BOTH)
-    error_listbox.pack(side='left', fill=BOTH)
+    success_listbox.pack(side="left", fill=BOTH)
+    error_listbox.pack(side="left", fill=BOTH)
 
-
+    success_box.update_idletasks()
+    error_box.update_idletasks()
+    logs_frame.update_idletasks()
 
     try:
         msg = WhatsApp()
         rows = []
-        with open(file_name, 'r') as file:
+        with open(file_name, "r") as file:
             csvreader = csv.reader(file)
             for row in csvreader:
                 rows.append(row)
@@ -346,44 +344,42 @@ def shoot():
         data = []
         for i in range(4, len(rows)):
             candidate_name = rows[i][0]
-            number = '91'+rows[i][1]
+            number = "91" + rows[i][1]
             status = rows[i][2]
             # print(rows[i])
-            if status == 'No':
+            if status == "No":
                 Meessages = create_msg(
-                    candidate_name, hr_name, script_msg, num_script_var, rows[i][3:])
+                    candidate_name, hr_name, script_msg, num_script_var, rows[i][3:]
+                )
 
                 msg.find_user(number)
-                success_listbox.insert(END, f'Messges sent to {candidate_name}')
                 for message in Meessages:
                     msg.send_message(message)
                     msg.catch_alert()
+                success_listbox.insert(END, f"Messges sent to {candidate_name}")
 
-        error_listbox.config(yscrollcommand = error_box.set)
+        error_listbox.config(yscrollcommand=error_box.set)
         success_listbox.config(yscrollcommand=success_box.set)
-  
-        success_box.config(command = success_listbox.yview)
+
+        success_box.config(command=success_listbox.yview)
         error_box.config(command=error_listbox.yview)
     except:
-        error_listbox.insert(END, f'Error in {candidate_name}')
-
-        pass
-
-    # handle file format error correctly using try catch
-
-    
+        error_listbox.insert(END, f"Unable to send: {candidate_name}")
 
 
 def FileSelect():
-    errors = ['Sahi file SELECT KER !!!', 'Kya ker raha hai baad mei soo jana, SAHI FILE SELECT KERRRR !!!',
-              'Tu rahne de, Phone utta aur message kerna START KER DE !!!']
+    errors = [
+        "Sahi file SELECT KER !!!",
+        "Kya ker raha hai baad mei soo jana, SAHI FILE SELECT KERRRR !!!",
+        "Tu rahne de, Phone utta aur message kerna START KER DE !!!",
+    ]
     level = 0
 
     def select():
         nonlocal level
         filename = filedialog.askopenfilename()
-        if not filename.endswith('.csv'):
-            shoot_sleep['state'] = 'disabled'
+        if not filename.endswith(".csv"):
+            shoot_sleep["state"] = "disabled"
             # prevent children to append again on details_frame
             for w in detail_frame.winfo_children():
                 w.destroy()
@@ -397,13 +393,14 @@ def FileSelect():
             global file_name
             file_name = filename
             # active the state of the shoot & sleep button
-            shoot_sleep['state'] = 'active'
+            shoot_sleep["state"] = "active"
 
             # prevent children to append again on details_frame
             for w in detail_frame.winfo_children():
                 w.destroy()
 
             show_details()
+
     return select
 
 
@@ -411,7 +408,7 @@ def show_details():
 
     try:
         rows = []
-        with open(file_name, 'r') as file:
+        with open(file_name, "r") as file:
             csvreader = csv.reader(file)
             for row in csvreader:
                 rows.append(row)
@@ -428,12 +425,15 @@ def show_details():
 
         for i in range(4, len(rows)):
             candidate_name = rows[i][0]
-            number = '91'+rows[i][1]
+            number = "91" + rows[i][1]
             status = rows[i][2]
             # print(rows[i])
-            if status == 'No':
-                final_messages.append(create_msg(
-                    candidate_name, hr_name, script_msg, num_script_var, rows[i][3:]))
+            if status == "No":
+                final_messages.append(
+                    create_msg(
+                        candidate_name, hr_name, script_msg, num_script_var, rows[i][3:]
+                    )
+                )
                 print("asdfafd")
             else:
                 already_done += 1
@@ -441,37 +441,40 @@ def show_details():
         left_detail_frame = Frame(detail_frame)
         right_detail_frame = Frame(detail_frame)
 
-        name_lable = Label(left_detail_frame, text="HR Name",
-                           font='Helvetica 14 bold')
-        name = Label(left_detail_frame, text=hr_name, font='Helvetica 14')
+        name_lable = Label(left_detail_frame, text="HR Name", font="Helvetica 14 bold")
+        name = Label(left_detail_frame, text=hr_name, font="Helvetica 14")
         name_lable.grid(row=5, column=3, padx=10)
         name.grid(row=5, column=4)
 
-        name_lable = Label(left_detail_frame,
-                           text="Total Candidate", font='Helvetica 14 bold')
-        name = Label(left_detail_frame, text=str(
-            len(rows) - 4), font='Helvetica 14')
+        name_lable = Label(
+            left_detail_frame, text="Total Candidate", font="Helvetica 14 bold"
+        )
+        name = Label(left_detail_frame, text=str(len(rows) - 4), font="Helvetica 14")
         name_lable.grid(row=6, column=3, padx=10)
         name.grid(row=6, column=4)
 
-        name_lable = Label(left_detail_frame,
-                           text="Already Done", font='Helvetica 14 bold')
-        name = Label(left_detail_frame, text=str(
-            already_done), font='Helvetica 14')
+        name_lable = Label(
+            left_detail_frame, text="Already Done", font="Helvetica 14 bold"
+        )
+        name = Label(left_detail_frame, text=str(already_done), font="Helvetica 14")
         name_lable.grid(row=7, column=3, padx=10)
         name.grid(row=7, column=4)
 
-        done_count = Label(right_detail_frame, text="0",
-                           foreground='blue', font='Helvetica4 40 bold')
+        done_count = Label(
+            right_detail_frame, text="0", foreground="blue", font="Helvetica4 40 bold"
+        )
         total_count = Label(
-            right_detail_frame, text=f'/  {len(rows) - 4 - already_done}', font='Helvetica 40 bold')
+            right_detail_frame,
+            text=f"/  {len(rows) - 4 - already_done}",
+            font="Helvetica 40 bold",
+        )
         done_count.grid(row=7, column=10)
         total_count.grid(row=7, column=11, padx=10)
 
-        left_detail_frame.pack(side='left')
-        right_detail_frame.pack(side='right', pady=20)
+        left_detail_frame.pack(side="left")
+        right_detail_frame.pack(side="right", pady=20)
 
-        detail_frame.pack(fill='x', padx=300, pady=20)
+        detail_frame.pack(fill="x", padx=300, pady=20)
     except:
         messagebox.showerror("error", "Please check correct format !")
 
@@ -479,30 +482,31 @@ def show_details():
 
 
 files_menu = Frame(root)
-bottom_frame = Frame(root)
+# bottom_frame = Frame(root)
 detail_frame = Frame(root)
 
-l2 = Label(files_menu, text="Select the CSV file: ")
-l2.pack(side='bottom')
-bottom_frame.pack(side='bottom')
-
+l2 = Label(root, text="Select the CSV filesafdsa: ")
+l2.pack(side="bottom")
+# bottom_frame.pack(fill='both', side='top')
 
 
 l1 = Label(files_menu, text="Select the CSV file: ")
-l1.pack(fill='both', side='left',)
+l1.pack(
+    fill="x",
+    side="left",
+)
 
 
 sel = FileSelect()
 
 
 fileSelectButton = Button(files_menu, text="Select File", command=sel)
-fileSelectButton.pack(fill='both', side='left')
+fileSelectButton.pack(fill="x", side="left")
 
 
-shoot_sleep = Button(files_menu, text="Shoot & Sleep",
-                     command=shoot, state='disabled')
-shoot_sleep.pack(fill='both', side='right')
+shoot_sleep = Button(files_menu, text="Shoot & Sleep", command=shoot, state="disabled")
+shoot_sleep.pack(fill="x", side="right")
 
-files_menu.pack(fill='both', padx=100, pady=10)
+files_menu.pack(fill="x", padx=100, pady=10)
 
 root.mainloop()
