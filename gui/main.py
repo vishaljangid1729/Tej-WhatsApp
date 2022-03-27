@@ -293,7 +293,6 @@ root.geometry("%dx%d" % (width, height))
 root.title("Tej WhatsApp")
 
 
-
 global file_name
 
 
@@ -302,21 +301,20 @@ def shoot():
         w.destroy()
     logs_frame.update_idletasks()
 
-    done_count_str.set('0')
+    done_count_str.set("0")
 
-    logs_frame.pack(padx=50, ipadx=10, fill='x')
+    logs_frame.pack(padx=50, ipadx=10, fill="x")
 
     success_box = Scrollbar(logs_frame)
     error_box = Scrollbar(logs_frame)
 
-
     success_listbox = Listbox(logs_frame)
     error_listbox = Listbox(logs_frame)
 
-    success_listbox.pack(side="left", fill='x', expand=True)
-    success_box.pack(side="left", fill='both')
-    error_listbox.pack(side="left", fill='x', expand=True)
-    error_box.pack(side="right", fill='both')
+    success_listbox.pack(side="left", fill="x", expand=True)
+    success_box.pack(side="left", fill="both")
+    error_listbox.pack(side="left", fill="x", expand=True)
+    error_box.pack(side="right", fill="both")
 
     success_box.update_idletasks()
     error_box.update_idletasks()
@@ -471,7 +469,10 @@ def show_details():
         name.grid(row=7, column=4)
 
         done_count = Label(
-            right_detail_frame, textvariable=done_count_str, foreground="blue", font="Helvetica4 40 bold"
+            right_detail_frame,
+            textvariable=done_count_str,
+            foreground="blue",
+            font="Helvetica4 40 bold",
         )
         total_count = Label(
             right_detail_frame,
