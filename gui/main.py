@@ -356,7 +356,7 @@ def shoot():
                 for message in Meessages:
                     msg.send_message(message)
                     msg.catch_alert()
-                success_listbox.insert(END, f"Messges sent to {candidate_name}")
+                success_listbox.insert(END, f"Messges sent to: {candidate_name}")
 
         error_listbox.config(yscrollcommand=error_box.set)
         success_listbox.config(yscrollcommand=success_box.set)
