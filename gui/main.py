@@ -364,7 +364,7 @@ def shoot():
         success_box.config(command=success_listbox.yview)
         error_box.config(command=error_listbox.yview)
     except:
-        error_listbox.insert(END, f"Unable to send: {candidate_name}")
+        error_listbox.insert(END, f"Unable to send {candidate_name}")
 
 
 def FileSelect():
